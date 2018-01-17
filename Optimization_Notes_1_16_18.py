@@ -1,24 +1,78 @@
 from pymprog import model
+import pandas as pd
+import numpy as np
+import sumoPython_git_A as SP
+import openpyxl as OPENxlsx
+
+def makeDataFrames_age(roads, time):
+    age_i_0 = np.array(np.random.randint(1,11,(roads,1)))
+    age_i_t_DF = pd.DataFrame(np.zeros((roads,time+1)))
+    roadlist = list()
+    timelist = list()
+    for t in range(0,time+1):
+        timelist.append('T_'+str(t))
+    for i in range(len(age_i_0)):
+        roadlist.append('Road'+str(i))
+    age_i_t_DF = pd.DataFrame(np.zeros((roads,time+1)), index=roadlist, columns=timelist)
+    for i in range(len(age_i_0)):
+        age_i_t_DF.iloc[i,0] = age_i_0[i,0]
+    return age_i_t_DF
+    
+def makeDataFrames_Activities(roads, time,age_i_t_DF):
+    M = [(i,t) for i in range(roads) for t in range(time+1)]
+    timelist = list()
+    roadlist = list()
+    counter = 0
+    DFcolumns = ['Road_ID','Age_0','xl_Primal','xs_Primal','Cost_i_t','T_Final']
+    # for t in range(0,time):
+        # timelist.append('T_'+str(t+1))
+    for i in M[1::2]:
+        roadlist.append('Road_'+str(counter))
+        counter += 1
+    XLnXS_i_t_DF = pd.DataFrame(np.zeros((roads,len(DFcolumns))), index=roadlist, columns=DFcolumns)
+    counter = 0
+    for i in M[1::2]:
+        XLnXS_i_t_DF.iloc[counter,0] = str(i)
+        XLnXS_i_t_DF.iloc[counter,1] = str(age_i_t_DF.iloc[counter,0])
+        counter += 1
+    return XLnXS_i_t_DF
+
+def testing_function(age_i_t_minus1,xl,xs):
+    ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
+    # xls_term = PYM._math.__mul__(PYM._math.__mul__((xs[asset,1]),.33),(age_i_t[asset][0]))
+    # xls_termII = PYM._math.__pow__(1,1)
+    # p.st(age_i_t[asset][1].value >= ((age_i_t[asset][0]) -(PYM._math.__mul__((age_i_t[asset][1]),(xl[asset,1])) + PYM._math.__mul__(                 )))
+    age_i_t = ((age_i_t_minus1) - ( ((xl) * (age_i_t_minus1)) + ( ((xs) * .85) * (age_i_t_minus1)) - (1 - ( (xl) + (xs) )) ) )
+    return age_i_t
+    age_i_t_minus1 = 4
+    var_from_above = .85
+    print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
+    
 
 p = model("5 roads and 1 period")
 print(p.get_prob_name())
 p.verbose(True)
 from __future__ import print_function
-import numpy as np
+
 import pymprog as PYM
 # from pymprog import *
 np.set_printoptions(precision = 2, linewidth = 400)
 from random import Random
 
+## Model Data ##
 rand = Random()
 roads =5
 time = 1
 # initializing indices
 M = [(i,t) for i in range(roads) for t in range(time+1)]
-age_i_0 = np.array(np.random.randint(1,11,(5,1)))
+age_i_t_DF = makeDataFrames_age(roads, time)
+XLnXS_i_t_DF = makeDataFrames_Activities(roads, time,age_i_t_DF)
 
+
+
+## Beging Model ##
 PYM.begin(p)
-# p.solver(int, br_tech=PYM.glpk.GLP_BR_PCH)
+p.solver(int, br_tech=PYM.glpk.GLP_BR_PCH)
 # begin("5 roads and 1 period")
 #action variables xl is large action, xs is small action ## Slice notation a[start_index:end_index:step]
 xl = p.var('xl', M[1::2], bool)
@@ -27,7 +81,7 @@ xs = p.var('xs', M[1::2], bool)
 # age_i_t = p.var('age',M, bounds = (0,10))
 print("\n*Variables*\n"),xl, print("\n**\n"),xs, print("\n**\n")#,age_i_t
 
-#Setting objective function
+##Setting objective function
 p.minimize(sum(xl[i]*200+xs[i]*75 for i in M[1::2]),'Cost')
 print("\nprint(p.get_obj_name()) = ",p.get_obj_name(),"\n")
 
@@ -40,7 +94,7 @@ for i in M[1::2]:
     cons_list.append(R)
     R1 = xl[i] + xs[i] >=0
     cons_list.append(R1)
-p.bound_ranges()
+# p.bound_ranges()
 # print(cons_list)
 
 # p.solve()
@@ -50,14 +104,13 @@ p.bound_ranges()
 ##SECOND TEST###
 import pymprog as PYM
 age_i_t = PYM.par('age',M[1::2])#, bounds = (0,10))
-for asset in range(age_i_0.shape[0]):
-    R2 = age_i_t[asset][0].value = age_i_0[asset,0] # '== (?)'setting random initial conditions
+for asset in range(age_i_t_DF.shape[0]):
+    R2 = age_i_t[asset][0].value = age_i_t_DF.iloc[asset,0] # '== (?)'setting random initial conditions
+    XLnXS_i_t_DF.iloc[asset,1] = age_i_t_DF.iloc[asset,0] ##Should be verified that the right age is going to the right road
     R3 = age_i_t[asset][1].value <= 10
     cons_list.append(R2)
     cons_list.append(R3)
-p.bound_ranges()
-# cons_list
-
+# p.bound_ranges()
 # p.solve()
 # p.sensitivity()
 # print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
@@ -68,49 +121,57 @@ p.bound_ranges()
 
 for asset in range(len(age_i_t)): #PYM._math.__pow__(
     p.st(age_i_t[asset][1].value >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .85) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
-# # # def testing_function(age_i_t_minus1,xl,xs):
-    # # # age_i_t = ((age_i_t_minus1) - ( ((xl) * (age_i_t_minus1)) + ( ((xs) * .85) * (age_i_t_minus1)) - (1 - ( (xl) + (xs) )) ) )
-    # # # return age_i_t
-    # # # age_i_t_minus1 = 4
-    # # # var_from_above = .85
-    # # # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
-     
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
-    # xls_term = PYM._math.__mul__(PYM._math.__mul__((xs[asset,1]),.33),(age_i_t[asset][0]))
-    # xls_termII = PYM._math.__pow__(1,1)
-    # p.st(age_i_t[asset][1].value >= ((age_i_t[asset][0]) -(PYM._math.__mul__((age_i_t[asset][1]),(xl[asset,1])) + PYM._math.__mul__(                 )))
+    # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
+     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
 p.solve()
 
 
 ## Find the out put and change the parameters
+# age_i_t_DF = makeDataFrames_age(roads, time)
+# XLnXS_i_t_DF = makeDataFrames_Activities(roads, time, age_i_t_DF)
 outPut_dict = dict()
+outPut_dict_primal = dict()
 outPut_key = list()
 counter = 1
 for i in range(1,11):
     print("\n<>",p.get_col_name(i),"= Coef = ", p.get_obj_coef(i), end='\r')
-    outPut_dict_Coeef.update({p.get_col_name(counter): str(xl[i].primal)})
+
+outPut_dict_primal = dict()
+counter = 1
+for i in M[1::2]:
+    outPut_dict_primal.update({p.get_col_name(counter): str(xl[i].primal)})
+    # XLnXS_i_t_DF.loc[counter-1,1] = str(xl[i].primal) # 1: 'xl_Primal'
+    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
+    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xs_Primal'] = str(xs[i].primal)
+    # # XLnXS_i_t_DF.iloc[counter-1,0] = str(xl[i].primal)
+    # XLnXS_i_t_DF.loc[counter-1,2 ] = str(xs[i].primal) # 'xs_Primal'
+    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'Cost_i_t'] = int(xs[i].primal)*75 + int(xl[i].primal)*200 #3 : 'Cost_i_t'
+    print(XLnXS_i_t_DF.index[counter-1] ," =(?)=", p.get_col_name(counter) ) #," =(?)=",
+    counter += 1
+
+    # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
 print("\n")
+counter = 6
+for i in M[1::2]:
+    outPut_dict_primal.update({p.get_col_name(counter): str(xs[i].primal)})
+    XLnXS_i_t_DF.iloc[counter-1,0] = str(xs[i].primal)
+    print(XLnXS_i_t_DF.index[counter-1]," =(?)=", p.get_col_name(counter) ) #
+    counter += 1
+    # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Belmont_AVEDic_ID'].str.contains(edgeLISTa[n].edgeID),'Total_Trucks']
+print("\n")
+XLnXS_i_t_DF.columns=['Primal']
+
+XLnXS_i_t_
+
+
+
+
 
 p.write_prob(0,'/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver.txt')
 
 
-for i in M[1::2]:
-    if counter <= 5:
-        print("xl[",i,"].primal = ",xl[i].primal,"\nxs[",i,"].primal = ",xs[i].primal,"\r\n\t\t\t\t")
-        # outPut_key.append(str("xl["+str(i)+"]"))
-        # outPut_dict.update({outPut_key[counter-1]: str(xl[i].primal)})
-        outPut_dict.update({p.get_col_name(counter): str(xl[i].primal)})    ##############STUCK HERE LERAN HOW TO UPDATE AGAIN AND CONTINUE TO VERIFY THAT THE SOLUTION IS TRUE
-        counter += 1
-    else: 
-    # print("counter = ", counter)
-        # outPut_key.append(str("xs["+str(i)+"]"))
-        # outPut_dict.update({outPut_key[counter-1]: str(xs[i].primal)})
-        outPut_dict.update({p.get_col_name(counter): str(xs[i].primal)})
-        # outPut_dict.update({counter : str(xs[i].primal)})
-        counter += 1
-    # outPut_dict.update(str("xl[",i,"].primal" = xl[i].primal))
-    # outPut_dict.update(str("xs[",i,"].primal" = xs[i].primal))
-    # counter += 1
+
 for i in M[1::2]:
     print("xl[",i,"].dual = ",xl[i].dual,"\nxs[",i,"].dual = ",xs[i].dual)
 
