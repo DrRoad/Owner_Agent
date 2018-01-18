@@ -23,7 +23,7 @@ def makeDataFrames_Activities(roads, time,age_i_t_DF):
     timelist = list()
     roadlist = list()
     counter = 0
-    DFcolumns = ['Road_ID','Age_0','xl_Primal','xs_Primal','Cost_i_t','T_Final']
+    DFcolumns = ['Road_ID_t','Age_0','xl_Primal','xs_Primal','Cost_i_t','T_age']
     # for t in range(0,time):
         # timelist.append('T_'+str(t+1))
     for i in M[1::2]:
@@ -37,17 +37,73 @@ def makeDataFrames_Activities(roads, time,age_i_t_DF):
         counter += 1
     return XLnXS_i_t_DF
 
-def testing_function(age_i_t_minus1,xl,xs):
+def ageing_function(age_i_t_minus1,xl_t_minus1,xs_t_minus1):
+    age_i_t = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1) ) ) + (1 - ( (xl_t_minus1) + (xs_t_minus1) ))
+    return age_i_t
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # xls_term = PYM._math.__mul__(PYM._math.__mul__((xs[asset,1]),.33),(age_i_t[asset][0]))
     # xls_termII = PYM._math.__pow__(1,1)
     # p.st(age_i_t[asset][1].value >= ((age_i_t[asset][0]) -(PYM._math.__mul__((age_i_t[asset][1]),(xl[asset,1])) + PYM._math.__mul__(                 )))
-    age_i_t = ((age_i_t_minus1) - ( ((xl) * (age_i_t_minus1)) + ( ((xs) * .85) * (age_i_t_minus1)) - (1 - ( (xl) + (xs) )) ) )
-    return age_i_t
-    age_i_t_minus1 = 4
-    var_from_above = .85
-    print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
+    # age_i_t_minus1 = 4
+    # var_from_above = .85
+    # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
+    ###GOOD TEST BELOW###
+    # age_i_t_minus1 = 4 #XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID_t'].str.contains(str(i)),'Age_0'][0]
+    # xl_t_minus1 = 0#xl[i].primal
+    # xs_t_minus1 = 0#xs[i].primal
+    ##END TEST INPUT VARIABLES##
+    # age_i_t = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1) ) ) + (1 - ( (xl_t_minus1) + (xs_t_minus1) ))
+    ### old function signs on last term swapped to make easier decoding ###
+    #age_i_t = ((age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1)) - (1 - ( (xl_t_minus1) + (xs_t_minus1) )) ) )
+    # age_i_t_1 = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) )
+    # age_i_t_2 = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1) ) ) 
+    # age_i_t_3 = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1) ) ) + (1 - ( (xl_t_minus1) + (xs_t_minus1) ))
+    # print("age_i_t_minus1 = ",age_i_t_minus1,"\nxl = ",xl_t_minus1,"\nxs = ",xs_t_minus1, "\nage_i_t_1...", age_i_t_1,"\nage_i_t_2..." ,age_i_t_2,"\nage_i_t_3..." , age_i_t_3,"\nage_i_t..." , age_i_t)
+    # w10 = ageing_function(7,1,0)
+    # w01 = ageing_function(7,0,1)
+    # w00 = ageing_function(7,0,0)
+    ###END TESTING###
+
     
+def XLnXS_i_t_DF_Maker(xl,xs,age_i_t):
+    # age_i_t_DF = makeDataFrames_age(roads, time)
+    # XLnXS_i_t_DF = makeDataFrames_Activities(roads, time, age_i_t_DF)
+    outPut_dict = dict()
+    outPut_dict_primal = dict()
+    outPut_key = list()
+    counter = 1
+    for i in range(1,11):
+        print("\n<>",p.get_col_name(i),"= Coef = ", p.get_obj_coef(i), end='\r')
+
+    outPut_dict_primal = dict()
+    counter = 1
+    Total_Cost= 0
+    DFrowLIST = XLnXS_i_t_DF.index.tolist()
+    for i in M[1::2]:
+        outPut_dict_primal.update({p.get_col_name(counter): str(xl[i].primal)})
+        # XLnXS_i_t_DF.loc[counter-1,1] = str(xl[i].primal) # 1: 'xl_Primal'
+        XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'xs_Primal']  = str(xl[i].primal)
+        XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'xs_Primal'] = str(xs[i].primal)
+        XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'T_Final'] = ageing_function(age_i_t_minus1 = XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'Age_0'],xl_t_minus1 = xl[i].primal ,xs_t_minus1 = xs[i].primal)
+        # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
+        # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xs_Primal'] = str(xs[i].primal)
+        # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'T_Final'] = ageing_function(age_i_t_minus1 = XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'Age_0'][0],xl = xl[i].primal ,xs = xs[i].primal)
+        # # XLnXS_i_t_DF.iloc[counter-1,0] = str(xl[i].primal)
+        # XLnXS_i_t_DF.loc[counter-1,2 ] = str(xs[i].primal) # 'xs_Primal'
+        XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'Cost_i_t'] = int(xs[i].primal)*75 + int(xl[i].primal)*200 #3 : 'Cost_i_t'
+        Total_Cost = Total_Cost + int(xs[i].primal)*75 + int(xl[i].primal)*200
+        print("\n")
+        print(XLnXS_i_t_DF.loc[DFrowLIST[counter-1],'Road_ID_t'] ," =(?)=", p.get_col_name(counter) ) #," =(?)=",
+        counter += 1
+    XLnXS_i_t_DF.name = ("Total Cost ="+str(Total_Cost))
+    print("Total Cost = ",XLnXS_i_t_DF.name," =(?)= ",p.vobj(),"\n",XLnXS_i_t_DF)
+    return XLnXS_i_t_DF
+    
+    
+    
+
+
+
 
 p = model("5 roads and 1 period")
 print(p.get_prob_name())
@@ -72,6 +128,7 @@ XLnXS_i_t_DF = makeDataFrames_Activities(roads, time,age_i_t_DF)
 
 ## Beging Model ##
 PYM.begin(p)
+p.solver('interior', msg_lev=PYM.glpk.GLP_MSG_OFF)
 p.solver(int, br_tech=PYM.glpk.GLP_BR_PCH)
 # begin("5 roads and 1 period")
 #action variables xl is large action, xs is small action ## Slice notation a[start_index:end_index:step]
@@ -79,90 +136,73 @@ xl = p.var('xl', M[1::2], bool)
 xs = p.var('xs', M[1::2], bool)
 #age variables not above 10 years old
 # age_i_t = p.var('age',M, bounds = (0,10))
-print("\n*Variables*\n"),xl, print("\n**\n"),xs, print("\n**\n")#,age_i_t
+print("\n*Variables*\n",xl,"\n**\n",xs,"\n**\n")#,age_i_t
 
 ##Setting objective function
 p.minimize(sum(xl[i]*200+xs[i]*75 for i in M[1::2]),'Cost')
 print("\nprint(p.get_obj_name()) = ",p.get_obj_name(),"\n")
 
-##FIRST TEST##
+##FIRST Condition Set##
+##Subjected to: Only one type of action can be selected
 cons_list = list()
 # print("Constraints: ",p.
-#subject to: Only one type of action per asset per step
-for i in M[1::2]:
-    R = xl[i] + xs[i] <=1 # Change to >= 1 if you want some results here, but it should be <=
+#subject to: 
+for i in M[1::2]: 
+    R = xl[i] + xs[i] <=1 # Only one type of action per asset per step # Change to >= 1 if you want some results here, but it should be <=
     cons_list.append(R)
-    R1 = xl[i] + xs[i] >=0
-    cons_list.append(R1)
-# p.bound_ranges()
-# print(cons_list)
+    # R1 = xl[i] + xs[i] >=0
+    # cons_list.append(R1)
+# p.bound_ranges(), print(cons_list), p.solve(), p.sensitivity() # print(p.status(),"Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
 
-# p.solve()
-# p.sensitivity()
-# print(p.status(),"Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
-
-##SECOND TEST###
+##SECOND Condition Set###
+##Subjected to: Initial conditions & maybe... age cannot be greater than 10
 import pymprog as PYM
 age_i_t = PYM.par('age',M[1::2])#, bounds = (0,10))
 for asset in range(age_i_t_DF.shape[0]):
-    R2 = age_i_t[asset][0].value = age_i_t_DF.iloc[asset,0] # '== (?)'setting random initial conditions
+    R2 = p.st(age_i_t[asset][0].value == age_i_t_DF.iloc[asset,0]) # '== (?)'setting random initial conditions
     XLnXS_i_t_DF.iloc[asset,1] = age_i_t_DF.iloc[asset,0] ##Should be verified that the right age is going to the right road
-    R3 = age_i_t[asset][1].value <= 10
+    R3 = p.st(age_i_t[asset][1].value <= 10)
+    # p.st(age_i_t[asset][1].value <= 10)
     cons_list.append(R2)
     cons_list.append(R3)
-# p.bound_ranges()
-# p.solve()
-# p.sensitivity()
-# print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
-# # p.status_map
+# p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
 
 
-###THIRD TEST###for asset in range(age_i_0.shape[0]):
 
+###THIRD Condition Set###
+##Subjected to next time period's value must conform to age function & maybe & age cannot be greater than 10
 for asset in range(len(age_i_t)): #PYM._math.__pow__(
-    p.st(age_i_t[asset][1].value >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .85) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
+    # R4 = p.st(((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) >= age_i_t[asset][1].value >= 10 )
+    R4 = p.st(10 >= age_i_t[asset][1].value >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
+    cons_list.append(R4)
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
-     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
+    ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
+
+     
+     
 p.solve()
-
-
+print(p.status(),"Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
+# p.bound_ranges()
+XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
 ## Find the out put and change the parameters
-# age_i_t_DF = makeDataFrames_age(roads, time)
-# XLnXS_i_t_DF = makeDataFrames_Activities(roads, time, age_i_t_DF)
-outPut_dict = dict()
-outPut_dict_primal = dict()
-outPut_key = list()
-counter = 1
-for i in range(1,11):
-    print("\n<>",p.get_col_name(i),"= Coef = ", p.get_obj_coef(i), end='\r')
 
-outPut_dict_primal = dict()
-counter = 1
-for i in M[1::2]:
-    outPut_dict_primal.update({p.get_col_name(counter): str(xl[i].primal)})
-    # XLnXS_i_t_DF.loc[counter-1,1] = str(xl[i].primal) # 1: 'xl_Primal'
-    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
-    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'xs_Primal'] = str(xs[i].primal)
-    # # XLnXS_i_t_DF.iloc[counter-1,0] = str(xl[i].primal)
-    # XLnXS_i_t_DF.loc[counter-1,2 ] = str(xs[i].primal) # 'xs_Primal'
-    XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID'].str.contains(str(i)),'Cost_i_t'] = int(xs[i].primal)*75 + int(xl[i].primal)*200 #3 : 'Cost_i_t'
-    print(XLnXS_i_t_DF.index[counter-1] ," =(?)=", p.get_col_name(counter) ) #," =(?)=",
-    counter += 1
 
-    # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
-print("\n")
-counter = 6
-for i in M[1::2]:
-    outPut_dict_primal.update({p.get_col_name(counter): str(xs[i].primal)})
-    XLnXS_i_t_DF.iloc[counter-1,0] = str(xs[i].primal)
-    print(XLnXS_i_t_DF.index[counter-1]," =(?)=", p.get_col_name(counter) ) #
-    counter += 1
-    # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Belmont_AVEDic_ID'].str.contains(edgeLISTa[n].edgeID),'Total_Trucks']
-print("\n")
-XLnXS_i_t_DF.columns=['Primal']
 
-XLnXS_i_t_
+## Now run the program again, but reset age_tminus one, have a three year forward vision... but first put in budget restrains 
+
+
+    # # # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Road_ID].str.contains(str(i)),'xl_Primal'] = str(xl[i].primal)
+# # print("\n")
+# # counter = 6
+# # for i in M[1::2]:
+    # # outPut_dict_primal.update({p.get_col_name(counter): str(xs[i].primal)})
+    # # XLnXS_i_t_DF.iloc[counter-1,0] = str(xs[i].primal)
+    # # print(XLnXS_i_t_DF.index[counter-1]," =(?)=", p.get_col_name(counter) ) #
+    # # counter += 1
+    # # # XLnXS_i_t_DF.loc[XLnXS_i_t_DF['Belmont_AVEDic_ID'].str.contains(edgeLISTa[n].edgeID),'Total_Trucks']
+# # print("\n")
+
 
 
 
