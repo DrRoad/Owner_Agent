@@ -1,3 +1,5 @@
+# # # # https://en.wikibooks.org/wiki/GLPK
+# # # https://en.wikibooks.org/wiki/GLPK/Python
 from pymprog import model
 import pandas as pd
 import numpy as np
@@ -40,6 +42,7 @@ def makeDataFrames_Activities(roads, time,age_i_t_DF):
 def ageing_function(age_i_t_minus1,xl_t_minus1,xs_t_minus1):
     age_i_t = (age_i_t_minus1) - ( ((xl_t_minus1) * (age_i_t_minus1)) + ( ((xs_t_minus1) * .33) * (age_i_t_minus1) ) ) + (1 - ( (xl_t_minus1) + (xs_t_minus1) ))
     return age_i_t
+def testing_junk_from_ageing_function():
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # xls_term = PYM._math.__mul__(PYM._math.__mul__((xs[asset,1]),.33),(age_i_t[asset][0]))
     # xls_termII = PYM._math.__pow__(1,1)
@@ -63,6 +66,7 @@ def ageing_function(age_i_t_minus1,xl_t_minus1,xs_t_minus1):
     # w01 = ageing_function(7,0,1)
     # w00 = ageing_function(7,0,0)
     ###END TESTING###
+    pass
 
     
 def XLnXS_i_t_DF_Maker(xl,xs,age_i_t):
@@ -105,7 +109,7 @@ def XLnXS_i_t_DF_Maker(xl,xs,age_i_t):
 
 
 
-p = model("5 roads and 1 period")
+p = model("5 roads and 1 period_AGE_is_a_Variable")
 print(p.get_prob_name())
 p.verbose(True)
 from __future__ import print_function
@@ -135,7 +139,7 @@ p.solver(int, br_tech=PYM.glpk.GLP_BR_PCH)
 xl = p.var('xl', M[1::2], bool)
 xs = p.var('xs', M[1::2], bool)
 #age variables not above 10 years old
-# age_i_t = p.var('age',M, bounds = (0,10))
+age_i_t = p.var('age',M, bounds = (0,10))
 print("\n*Variables*\n",xl,"\n**\n",xs,"\n**\n")#,age_i_t
 
 ##Setting objective function
@@ -157,23 +161,27 @@ for i in M[1::2]:
 ##SECOND Condition Set###
 ##Subjected to: Initial conditions & maybe... age cannot be greater than 10
 import pymprog as PYM
-age_i_t = PYM.par('age',M[1::2])#, bounds = (0,10))
+# age_i_t = PYM.par('age',M[1::2])#, bounds = (0,10))
 for asset in range(age_i_t_DF.shape[0]):
-    R2 = p.st(age_i_t[asset][0].value == age_i_t_DF.iloc[asset,0]) # '== (?)'setting random initial conditions
+    # R2 = p.st(age_i_t_DF.iloc[asset,0] <= age_i_t[asset,0] >= age_i_t_DF.iloc[asset,0]) # '== (?)'setting random initial conditions
+    p.st(age_i_t[asset,0] == int(age_i_t_DF.iloc[asset,0]))
     XLnXS_i_t_DF.iloc[asset,1] = age_i_t_DF.iloc[asset,0] ##Should be verified that the right age is going to the right road
-    R3 = p.st(age_i_t[asset][1].value <= 10)
-    # p.st(age_i_t[asset][1].value <= 10)
-    cons_list.append(R2)
-    cons_list.append(R3)
-# p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
+    # cons_list.append(R2)
+    # R3 = p.st(age_i_t[asset,1] <= 10)
+    # # p.st(age_i_t[asset][1].value <= 10)
+    # cons_list.append(R3)
+p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # 
+print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
 
 
 
 ###THIRD Condition Set###
 ##Subjected to next time period's value must conform to age function & maybe & age cannot be greater than 10
-for asset in range(len(age_i_t)): #PYM._math.__pow__(
+for asset in range(roads):#len(age_i_t)): #PYM._math.__pow__(
     # R4 = p.st(((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) >= age_i_t[asset][1].value >= 10 )
-    R4 = p.st(10 >= age_i_t[asset][1].value >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
+    # R4 = p.st(10 >= age_i_t[asset, 1] >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset,0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset, 0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
+    ###NEED TO CHANGE TO PYM._math.__mul__() #still doesn't work... poo poo 
+    R4 = p.st(age_i_t[asset, 1] >= (age_i_t[asset,0]) - ( PYM._math.__mul__((xl[asset,1]) , (age_i_t[asset,0])) ))# + ( ((xs[asset,1]) * .33) * (age_i_t[asset,0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) )) )
     cons_list.append(R4)
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))

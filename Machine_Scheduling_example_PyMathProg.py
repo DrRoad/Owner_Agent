@@ -8,7 +8,8 @@ U = (9,7,8) #latest finish
 
 # from pymprog import *
 import pymprog as PYM 
-js = begin("job-scheduling")
+js = PYM.model("job-scheduling")
+PYM.begin(js)
 x = js.var('x',  N) #start time
 #MD[i,j] = (D[i]+D[j])/2.0
 #T[i] = x[i] + D[i]
