@@ -132,7 +132,7 @@ XLnXS_i_t_DF = makeDataFrames_Activities(roads, time,age_i_t_DF)
 
 ## Beging Model ##
 PYM.begin(p)
-p.solver('interior', msg_lev=PYM.glpk.GLP_MSG_OFF)
+# p.solver('interior', msg_lev=PYM.glpk.GLP_MSG_OFF)
 p.solver(int, br_tech=PYM.glpk.GLP_BR_PCH)
 # begin("5 roads and 1 period")
 #action variables xl is large action, xs is small action ## Slice notation a[start_index:end_index:step]
@@ -152,7 +152,7 @@ cons_list = list()
 # print("Constraints: ",p.
 #subject to: 
 for i in M[1::2]: 
-    R = xl[i] + xs[i] <=1 # Only one type of action per asset per step # Change to >= 1 if you want some results here, but it should be <=
+    R = 0 <= xl[i] + xs[i] <= 1 # Only one type of action per asset per step # Change to >= 1 if you want some results here, but it should be <=
     cons_list.append(R)
     # R1 = xl[i] + xs[i] >=0
     # cons_list.append(R1)
@@ -171,18 +171,31 @@ for asset in range(age_i_t_DF.shape[0]):
     # # p.st(age_i_t[asset][1].value <= 10)
     # cons_list.append(R3)
 p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # 
-print(p.status(),"Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
-
+print(p.status(),"\n\n<<<Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
+print(p.sensit())
 
 
 ###THIRD Condition Set###
 ##Subjected to next time period's value must conform to age function & maybe & age cannot be greater than 10
 for asset in range(roads):#len(age_i_t)): #PYM._math.__pow__(
     # R4 = p.st(((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) >= age_i_t[asset][1].value >= 10 )
+    
     # R4 = p.st(10 >= age_i_t[asset, 1] >= ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset,0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset, 0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) )
+    
+    
     ###NEED TO CHANGE TO PYM._math.__mul__() #still doesn't work... poo poo 
-    R4 = p.st(age_i_t[asset, 1] >= (age_i_t[asset,0]) - ( PYM._math.__mul__((xl[asset,1]) , (age_i_t[asset,0])) ))# + ( ((xs[asset,1]) * .33) * (age_i_t[asset,0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) )) )
+    # R4 = p.st(age_i_t[asset, 1] >= (age_i_t[asset,0]) - ( PYM._math.__mul__((xl[asset,1]) , (age_i_t[asset,0])))  + ( ((xs[asset,1]) * .33) * (age_i_t[asset,0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) )) )
+    R4 = 0 == ( (age_i_t[asset,0]) - ( ((xl[asset,1]) * (age_i_t[asset,0]))  + ( ((xs[asset,1]) * .33) * (age_i_t[asset,0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) ) ) ) - age_i_t[asset, 1]
     cons_list.append(R4)
+            # age_i_tz = 4
+            # xlz = 0
+            # xsz = 0
+    
+            # ( (age_i_tz) - ( ((xlz) * (age_i_tz))  + ( ((xsz) * .33) * (age_i_tz) ) )  + (1 - ( (xlz) + (xsz) ) ) )
+    
+    
+    
+    
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
@@ -190,7 +203,7 @@ for asset in range(roads):#len(age_i_t)): #PYM._math.__pow__(
      
      
 p.solve()
-print(p.status(),"Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
+print(p.status(),"\n\n<<<Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
 # p.bound_ranges()
 XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
 ## Find the out put and change the parameters
