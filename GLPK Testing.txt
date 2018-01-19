@@ -1,0 +1,24 @@
+GLPK test
+https://anaconda.org/conda-forge/glpk
+https://www.coin-or.org/download/binary/CoinAll/
+http://winglpk.sourceforge.net/#quickguide
+
+Path C:\ProgramData\Anaconda3\Lib\site-packages\pulp\solverdir\glpk\Library\bin
+or C:\ProgramData\Anaconda3\pkgs\glpk-4.63-vc14_0\Library\bin or C:\ProgramData\Anaconda3\pkgs\glpk-4.63-vc14_0\Library\lib or C:\ProgramData\Anaconda3\Lib\glpk\glpk-4.64\w64
+CMD$ glpsol -m /ProgramData/Anaconda3/Lib/glpk/glpk-4.64/examples/tsp.mod
+
+
+
+
+
+
+
+
+
+Notes:
+Things that may have helped:
+https://en.wikibooks.org/wiki/GLPK/Python
+https://pypi.python.org/pypi/glpk
+http://tfinley.net/software/pyglpk/building.html
+http://www.dcc.fc.up.pt/~jpp/code/python-glpk/
+http://tfinley.net/software/pyglpk/building.html

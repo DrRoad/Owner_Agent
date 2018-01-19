@@ -180,10 +180,10 @@ for asset in range(roads):#len(age_i_t)): #PYM._math.__pow__(
      
 p.solve(), print(p.status(),"\n\n<<<Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
 # p.bound_ranges()
-XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
+XLnXS_i_t_DF = XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
 for asset in range(roads): # this will update the age parameters, but to what end if I can't say age >=10 i can in R3
     age_i_t[asset][1].value = XLnXS_i_t_DF.loc[XLnXS_i_t_DF.index.tolist()[asset-1],'T_Final']
-
+XLnXS_i_t_DF = XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
     
 p.write_prob(0,'/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver.txt')
 p.write_mip('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver_MIP.txt')
@@ -191,14 +191,34 @@ p.write_sol('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Ba
 p.end()
     
     
+### Now to have the activity variable be an integer and each integer has a different cost assoicate with it... :D ###
+# http://www.cnd.mcgill.ca/~ivan/it_ineq_script/python%20LP%20solvers/glpk-4.45/src/glpapi12.c
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>## http://www.gurobi.com/documentation/7.5/examples/mip1_py.html ##<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
     
     
-    
-    
-    
-    
-    
+R1 = xl[0,1] + xs[0,1] >= 0
+R2 = xl[0,1] + xs[0,1] <= 1
+R3 = xl[1,1] + xs[1,1] >= 0
+R4 = xl[1,1] + xs[1,1] <= 1
+R5 = xl[2,1] + xs[2,1] >= 0
+R6 = xl[2,1] + xs[2,1] <= 1
+R7 = xl[3,1] + xs[3,1] >= 0
+R8 = xl[3,1] + xs[3,1] <= 1
+R9 = xl[4,1] + xs[4,1] >= 0
+R10 = xl[4,1] + xs[4,1] <= 1
+R11 = (age_i_t[0,0] - xl[0,1] * age_i_t[0,0] + xs[0,1] * 0.33 * age_i_t[0,0] + 1 - xl[0,1] + xs[0,1] - age_i_t[0,1]==0)
+R12 = (age_i_t[1,0] - xl[1,1] * age_i_t[1,0] + xs[1,1] * 0.33 * age_i_t[1,0] + 1 - xl[1,1] + xs[1,1] - age_i_t[1,1]==0)
+R13 = (age_i_t[2,0] - xl[2,1] * age_i_t[2,0] + xs[2,1] * 0.33 * age_i_t[2,0] + 1 - xl[2,1] + xs[2,1] - age_i_t[2,1]==0)
+R14 = (age_i_t[3,0] - xl[3,1] * age_i_t[3,0] + xs[3,1] * 0.33 * age_i_t[3,0] + 1 - xl[3,1] + xs[3,1] - age_i_t[3,1]==0)
+R15 = (age_i_t[4,0] - xl[4,1] * age_i_t[4,0] + xs[4,1] * 0.33 * age_i_t[4,0] + 1 - xl[4,1] + xs[4,1] - age_i_t[4,1]==0)
+
+
+p.var(age_i_t[0,0], bounds = (6, 6))
+p.var(age_i_t[1,0], bounds = (9, 9))
+p.var(age_i_t[2,0], bounds = (1, 1))
+p.var(age_i_t[3,0], bounds = (2, 2))
+p.var(age_i_t[4,0], bounds = (8, 8))
     
     
 ## Find the out put and change the parameters

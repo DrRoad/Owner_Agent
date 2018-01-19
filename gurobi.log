@@ -1,0 +1,636 @@
+
+Gurobi 7.5.2 (win64, Python) logging started 01/19/18 13:27:28
+
+Academic license - for non-commercial use only
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:28
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\a934f6fa7df343b687879cfe2c50f6c6-pulp.lp
+Reading time = 0.01 seconds
+obj: 5 rows, 5 columns, 7 nonzeros
+Optimize a model with 5 rows, 5 columns and 7 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 1 rows and 2 columns
+Presolve time: 0.00s
+
+Solved in 0 iterations and 0.00 seconds
+Infeasible model
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:28
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\d9bbace2f5fa47ef8a2ed17456af9fcf-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 4 columns, 7 nonzeros
+Optimize a model with 4 rows, 4 columns and 7 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 4 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.400000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\d9bbace2f5fa47ef8a2ed17456af9fcf-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:28
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\06aaabef18d84e08998752688c9acfc5-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 4 columns, 7 nonzeros
+Optimize a model with 4 rows, 4 columns and 7 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 4 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.0000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  8.000000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\06aaabef18d84e08998752688c9acfc5-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:28
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\96b698dfdd2f4a3aba9daa943a17ead5-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 4 columns, 7 nonzeros
+Optimize a model with 4 rows, 4 columns and 7 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve time: 0.00s
+
+Solved in 0 iterations and 0.00 seconds
+Infeasible or unbounded model
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\e9f3fe8288fd41a3a4a92faa199e8407-pulp.lp
+Reading time = 0.01 seconds
+obj: 6 rows, 5 columns, 9 nonzeros
+Optimize a model with 6 rows, 5 columns and 9 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 6 rows and 5 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.400000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\e9f3fe8288fd41a3a4a92faa199e8407-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\391c41449c2d46f2af90d4f684f47a58-pulp.lp
+Reading time = 0.01 seconds
+OBJ: 6 rows, 5 columns, 9 nonzeros
+Optimize a model with 6 rows, 5 columns and 9 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 6 rows and 5 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  0.000000000e+00
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\391c41449c2d46f2af90d4f684f47a58-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\376672110452487c91d2876ddaaa046a-pulp.lp
+Reading time = 0.01 seconds
+OBJ: 6 rows, 5 columns, 9 nonzeros
+Optimize a model with 6 rows, 5 columns and 9 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 6 rows and 5 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    2.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  2.000000000e+00
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\376672110452487c91d2876ddaaa046a-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\dc0e669728ab42ba9f835fff4ba338bd-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 4 columns, 7 nonzeros
+Optimize a model with 4 rows, 4 columns and 7 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 4 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.400000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\dc0e669728ab42ba9f835fff4ba338bd-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\5f796b10f30e424eb296e7e19b33c9c4-pulp.lp
+Reading time = 0.01 seconds
+obj: 3 rows, 3 columns, 6 nonzeros
+Optimize a model with 3 rows, 3 columns and 6 nonzeros
+Variable types: 2 continuous, 1 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 3 rows and 3 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 64 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.400000000000e+01, best bound 6.400000000000e+01, gap 0.0000%
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\5f796b10f30e424eb296e7e19b33c9c4-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\28d64f2e3a304230861ba8778242fa85-pulp.lp
+Reading time = 0.00 seconds
+obj: 3 rows, 3 columns, 6 nonzeros
+Optimize a model with 3 rows, 3 columns and 6 nonzeros
+Variable types: 2 continuous, 1 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 3 rows and 3 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 64.95 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.495000000000e+01, best bound 6.495000000000e+01, gap 0.0000%
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\28d64f2e3a304230861ba8778242fa85-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\045fd70ab87a454cbd51a44ea2615603-pulp.lp
+Reading time = 0.00 seconds
+obj: 3 rows, 3 columns, 6 nonzeros
+Optimize a model with 3 rows, 3 columns and 6 nonzeros
+Variable types: 2 continuous, 1 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 3 rows and 3 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 64 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.400000000000e+01, best bound 6.400000000000e+01, gap 0.0000%
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\045fd70ab87a454cbd51a44ea2615603-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\b4ea9d4f1db9407fad0c10f39ba70104-pulp.lp
+Reading time = 0.01 seconds
+OBJ: 3 rows, 4 columns, 6 nonzeros
+Optimize a model with 3 rows, 4 columns and 6 nonzeros
+Variable types: 3 continuous, 1 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 3 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 0 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\b4ea9d4f1db9407fad0c10f39ba70104-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\831cfc4999c642de83f2989c48012620-pulp.lp
+Reading time = 0.01 seconds
+OBJ: 3 rows, 4 columns, 6 nonzeros
+Optimize a model with 3 rows, 4 columns and 6 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+01]
+  RHS range        [5e+00, 2e+01]
+Presolve removed 1 rows and 1 columns
+Presolve time: 0.00s
+
+Solved in 0 iterations and 0.00 seconds
+Infeasible model
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\77a19abef2fb446fbb91f7abea7b22ae-pulp.lp
+Reading time = 0.00 seconds
+OBJ: 3 rows, 4 columns, 6 nonzeros
+Optimize a model with 3 rows, 4 columns and 6 nonzeros
+Variable types: 1 continuous, 3 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+01]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 2 rows and 3 columns
+Presolve time: 0.00s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\1182d09fae3b48689c7b37a7ec54b434-pulp.lp
+Reading time = 0.01 seconds
+obj: 3 rows, 3 columns, 6 nonzeros
+Optimize a model with 3 rows, 3 columns and 6 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 3 rows and 3 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.400000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\1182d09fae3b48689c7b37a7ec54b434-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\03660dfa6b9a4d018eb75eac8dec6249-pulp.lp
+Reading time = 0.01 seconds
+obj: 3 rows, 2 columns, 4 nonzeros
+Optimize a model with 3 rows, 2 columns and 4 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 4e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve time: 0.00s
+
+Solved in 0 iterations and 0.00 seconds
+Infeasible model
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\431ba1483f78458da1d6897300cdb65c-pulp.lp
+Reading time = 0.00 seconds
+obj: 5 rows, 4 columns, 9 nonzeros
+Optimize a model with 5 rows, 4 columns and 9 nonzeros
+Coefficient statistics:
+  Matrix range     [5e-01, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [5e+00, 1e+01]
+Presolve removed 5 rows and 4 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    6.2000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  6.200000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\431ba1483f78458da1d6897300cdb65c-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\f941cfc435f44fa4ac2b2089140acf2d-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 7 columns, 10 nonzeros
+Optimize a model with 4 rows, 7 columns and 10 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [1e+00, 1e+01]
+Presolve removed 4 rows and 7 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.3000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.300000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\f941cfc435f44fa4ac2b2089140acf2d-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\c225dc7061694a5fa3c216d43627b7fb-pulp.lp
+Reading time = 0.01 seconds
+obj: 4 rows, 7 columns, 10 nonzeros
+Optimize a model with 4 rows, 7 columns and 10 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e-01, 4e+00]
+  RHS range        [1e+00, 1e+01]
+Presolve removed 4 rows and 7 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.2900000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.290000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\c225dc7061694a5fa3c216d43627b7fb-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\ab5453d834e543279ccf5d604718eba2-pulp.lp
+Reading time = 0.00 seconds
+obj: 4 rows, 7 columns, 10 nonzeros
+Optimize a model with 4 rows, 7 columns and 10 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [1e+00, 1e+01]
+Presolve removed 4 rows and 7 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.3000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds
+Optimal objective  5.300000000e+01
+
+Wrote result file 'C:\Users\Biko\AppData\Local\Temp\ab5453d834e543279ccf5d604718eba2-pulp.sol'
+
+
+Gurobi 7.5.2 (win64) logging started 01/19/18 13:27:29
+
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 7.5.2 build v7.5.2rc1 (win64)
+Copyright (c) 2017, Gurobi Optimization, Inc.
+
+Read LP format model from file C:\Users\Biko\AppData\Local\Temp\7eb5f224de40400a8bab9b139794df5c-pulp.lp
+Reading time = 0.00 seconds
+obj: 4 rows, 7 columns, 10 nonzeros
+Optimize a model with 4 rows, 7 columns and 10 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [9e-01, 9e+00]
+  Bounds range     [1e+00, 4e+00]
+  RHS range        [1e+00, 1e+01]
+Presolve removed 1 rows and 3 columns
+Presolve time: 0.00s
+
+Solved in 0 iterations and 0.00 seconds
+Infeasible or unbounded model
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 7.5.2 (win64, Python) logging started 01/19/18 13:48:19
+
+Academic license - for non-commercial use only
+Optimize a model with 2 rows, 3 columns and 5 nonzeros
+Variable types: 0 continuous, 3 integer (3 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 3e+00]
+  Objective range  [1e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Found heuristic solution: objective 2.0000000
+Presolve removed 2 rows and 3 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.13 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 2: 3 2 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.000000000000e+00, best bound 3.000000000000e+00, gap 0.0000%
+Optimize a model with 2 rows, 3 columns and 5 nonzeros
+Variable types: 0 continuous, 3 integer (3 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 3e+00]
+  Objective range  [1e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Found heuristic solution: objective 2.0000000
+Presolve removed 2 rows and 3 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 2: 3 2 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.000000000000e+00, best bound 3.000000000000e+00, gap 0.0000%
