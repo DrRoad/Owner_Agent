@@ -154,52 +154,53 @@ cons_list = list()
 for i in M[1::2]: 
     R = xl[i] + xs[i] <= 1 # Only one type of action per asset per step # Change to >= 1 if you want some results here, but it should be <=
     cons_list.append(R)
-    # R1 = xl[i] + xs[i] >=0
-    # cons_list.append(R1)
-# p.bound_ranges(), print(cons_list), p.solve(), p.sensitivity() # print(p.status(),"Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
 
 ##SECOND Condition Set###
-##Subjected to: Initial conditions & maybe... age cannot be greater than 10
+##Subjected to: Initial conditions
 import pymprog as PYM
-age_i_t = PYM.par('age',M[1::2])#, bounds = (0,10))
+age_i_t = PYM.par('age',M[1::2])
 for asset in range(age_i_t_DF.shape[0]):
-    # R2 = p.st(age_i_t_DF.iloc[asset,0] <= age_i_t[asset,0] >= age_i_t_DF.iloc[asset,0]) # '== (?)'setting random initial conditions
     age_i_t[asset][0].value = age_i_t_DF.iloc[asset,0]
-    # age_i_t[asset][1].value = age_i_t[asset][0].value +1
     XLnXS_i_t_DF.iloc[asset,1] = age_i_t_DF.iloc[asset,0] ##Should be verified that the right age is going to the right road
-    # cons_list.append(R2)
-    # R3 = p.st(age_i_t[asset,1] <= 10)
-    # # p.st(age_i_t[asset][1].value <= 10)
-    # cons_list.append(R3)
-p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # 
-print(p.status(),"\n\n<<<Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
+# p.bound_ranges(), p.solve(),# p.status_map, p.sensitivity() # 
+# print(p.status(),"\n\n<<<Second Test ::: Objective value ",p.get_obj_name(),": is $",p.get_obj_val())
 # print(p.sensit())
 
 
 ###THIRD Condition Set###
 ##Subjected to next time period's value must conform to age function & maybe & age cannot be greater than 10
 for asset in range(roads):#len(age_i_t)): #PYM._math.__pow__(
-
-    ###NEED TO CHANGE TO PYM._math.__mul__() #still doesn't work... poo poo 
-    # R4 = p.st(age_i_t[asset, 1] >= (age_i_t[asset,0]) - ( PYM._math.__mul__((xl[asset,1]) , (age_i_t[asset,0])))  + ( ((xs[asset,1]) * .33) * (age_i_t[asset,0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) )) )
-    # R4 = p.st(age_i_t[asset][1] <= 4)
-    ##### latest #####age_i_t[asset][1].value = ((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0]) ) - (1 - ( (xl[asset,1]) + (xs[asset,1])) ) )) <=4
-    # R4 = ( (age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0]))  + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0]) ) ) + (1 - ( (xl[asset,1]) + (xs[asset,1]) ) ) )  <= age_i_t[asset][1].value <= 10
-    # cons_list.append(R4)
-    R4 = p.st(((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) <= 5)
-    cons_list.append(R4)
+    R3 = p.st(((age_i_t[asset][0]) - ( ((xl[asset,1]) * (age_i_t[asset][0])) + ( ((xs[asset,1]) * .33) * (age_i_t[asset][0])) - ( 1 - ( (xl[asset,1]) + (xs[asset,1]) )) ) ) <= 5)
+    cons_list.append(R3)
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
     # print(testing_function(4,1,0) == 0 , testing_function(4,0,1) == age_i_t_minus1 - var_from_above * age_i_t_minus1, testing_function(4,0,0) == age_i_t_minus1 +1,"\nxl Used:",testing_function(4,1,0) ,"\n", "xs Used: ", testing_function(4,0,1) ,"\nNothing Used:", testing_function(4,0,0))
     ####TEST TEST TEST FOR (agent_i_t-1,xl,xs,)
 
      
      
-p.solve()
-print(p.status(),"\n\n<<<Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
+p.solve(), print(p.status(),"\n\n<<<Third Test ::: Objective value ",p.get_obj_name(),": is $",p.vobj(),"\nConstraints = (why can't I get the module to do this\n",cons_list)
 # p.bound_ranges()
 XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
+for asset in range(roads): # this will update the age parameters, but to what end if I can't say age >=10 i can in R3
+    age_i_t[asset][1].value = XLnXS_i_t_DF.loc[XLnXS_i_t_DF.index.tolist()[asset-1],'T_Final']
 
-8  - 1 - xl[4,1] + xs[4,1] <= 5
+    
+p.write_prob(0,'/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver.txt')
+p.write_mip('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver_MIP.txt')
+p.write_sol('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver_MIP_sol.txt')   
+p.end()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ## Find the out put and change the parameters
 ### this breaks everything below 
 # # for asset in range(roads):
@@ -225,9 +226,7 @@ XLnXS_i_t_DF_Maker(xl,xs,age_i_t)
 
 
 
-p.write_prob(0,'/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver.txt')
-p.write_mip('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver_MIP.txt')
-p.write_sol('/Users/Biko/Dropbox/PhD/Research/Python Code/Sumo_Python_Code_DB/Basic_Trial_Opti_Solver_MIP_sol.txt')
+
 
 for i in M[1::2]:
     print("xl[",i,"].dual = ",xl[i].dual,"\nxs[",i,"].dual = ",xs[i].dual)
