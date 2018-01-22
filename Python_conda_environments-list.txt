@@ -1,0 +1,37 @@
+(C:\ProgramData\Anaconda3) C:\GitHub\Owner_Agent>conda list
+# packages in environment at C:\ProgramData\Anaconda3: ## make this env py35
+#
+conda install _license alabaster anaconda-navigator anaconda-project asn1crypto astroid attrs babel beautifulsoup4 bitarray bleach 
+ nopes: blinker; conda conda-envconsole_shortcut; d9t.json; dask-coredatashapedecoratordistributed; fastcacheflask
+
+conda install bokeh boto boto3 botocore bz2file bzip2 ca-certificates certifi certifi cffi chardet chardet click cloudpickle clyent colorama  contextlib2 cookies cryptography curl cvxopt cycler cython cytoolz docutils et_xmlfile flask-cors 
+
+
+nopes: geojson;
+
+conda install freetype  get_terminal_size gevent glpk gmplot google.directions googlemaps greenlet h5py hdf5 heapdict HTMLParser icc_rt icu idna imageio imagesizeintel-openmp ipykernelipython ipython_genutils ipywidgets isort itsdangerous jdcal jedi jinja2   jmespath jsonschema jupyter jupyter_client jupyter_console jupyter_core krb5     lazy-object-proxy libiconv libssh2  libtiff libxml2  libxslt llvmlite lxml m2w64-dsdp m2w64-fftw m2w64-gcc-libgfortran m2w64-gcc-libs m2w64-gcc-libs-core m2w64-glpk m2w64-gmpm2w64-gslm2w64-libwinpthread-git m2w64-openblas markupsafe matplotlib mccabe menuinst mkl mkl-service mpmath msgpack-python msys2-conda-epoch multipledispatch navigator-updater nbconvertnbformat nltk nose notebook numexpr numpy numpydoc odo olefile openpyxl packagingpandas pandoc pandocfilters partd path.py pathlib2 patsy pep8     pickleshare pillow pip pluggy ply polyline psutil PuLP py pycodestyle pycosat pycparserpycrypto pyflakes pyjwt pylint pymprog pyodbc pyopensslpyparsingpyperclippyqt pysocks pytables python python-crfsuite python-dateutil python-gmaps pytz pywavelets pywin32  pyyaml pyzmq qt qtawesomeqtconsoleqtpy requests requests-oauthlib responsesrope ruamel_yaml s3transfer sagemath scikit-learn scipy seaborn setuptools simplegeneric singledispatch sip six smart_open snowballstemmer sortedcollections sortedcontainers sphinx sphinxcontrib-websupport sqlalchemy statsmodels swig swiglpk sympy tblib testpath toolz tornado traitletstwython typing unicodecsv urllib3  urllib3  vc vs2015_runtime wcwidth webencodings werkzeug widgetsnbextension win_inet_pton win_unicode_console wincertstore wrapt xlrd xlsxwriter xlwings xlwt yaml zict zlib 
+
+
+
+probably need install C:\GitHub\Owner_Agent>activate C:\GitHub\Owner_Agent>conda packages environment C:\ProgramData\Anaconda3\envs\py36:#anaconda custom py36h363777c_0conda 
+
+conda install backportsbzip2    
+
+
+
+nopes: dask-coredecoratorfreetype; gurobipy, intelpython, mkl_fft; mkl_random; openmp; tcl; traitletsvc
+
+
+conda promt:
+
+$ conda create -n py36 
+
+$ conda install colorama freetype glpk imageio intel-openmp ipython ipython_genutils jpeg libpng libtiff matplotlib mkl  networkx numpy olefile openssl pandas path.py pickleshare pillow pip prompt_toolkit pygments python-dateutil pytz pywavelets scikit-image scikit-learn scipy setuptools simplegeneric six sqlite  tk toolz vs2015_runtime wcwidth wheel win_unicode_console xz zlib openpyxl
+
+$ conda install -c conda-forge glpk
+
+
+https://www.coin-or.org/download/binary/CoinAll/
+
+pip install pulp
+gurobipy
