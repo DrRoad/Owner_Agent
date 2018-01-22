@@ -27,3 +27,4 @@ import pulp as PLP
 prob = PLP.LpProblem("Cost Minimization of Maintenance Activities to achieve a max life threshold",PLP.LpMinimize)
 
 
+>>>>>>>>>>>>>!!!!!!!!!!!!! http://examples.gurobi.com/production-scheduling/ !!!!!!!!!!!!
